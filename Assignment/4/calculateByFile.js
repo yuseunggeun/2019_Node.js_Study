@@ -5,33 +5,29 @@ const subtract=calc.subtract;
 const multiply=calc.multiply;
 const divide=calc.divide;
 
+let result;
+
 fs.readFile('input.txt',(err,content)=>{
     if (err) 
         throw err;
     const data = content.toString().split(',');
-    
+    const data1 = Number(data[0]);
+    const data2 = Number(data[2]);
+
     if(data[1]=='+'){
-        fs.writeFile('output.txt',add(Number(data[0]),Number(data[2])),(err)=>{
-            if (err)
-                throw err;
-        })
+        result = add(data1,data2);
     }
     else if(data[1]=='-'){
-        fs.writeFile('output.txt',subtract(Number(data[0]),Number(data[2])),(err)=>{
-            if (err)
-                throw err;
-        })
+        result = subtract(data1,data2);
     }
     else if(data[1]=='*'){
-        fs.writeFile('output.txt',multiply(Number(data[0]),Number(data[2])),(err)=>{
-            if (err)
-                throw err;
-        })
+        result = multiply(data1,data2);
     }
     else if(data[1]=='/'){
-        fs.writeFile('output.txt',divide(Number(data[0]),Number(data[2])),(err)=>{
-            if (err)
-                throw err;
-        })
+        result = divide(data1,data2);
     }
+    fs.writeFile('output.txt',result,(err)=>{
+        if (err)
+            throw err;
+    })
 });
